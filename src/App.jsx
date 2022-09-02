@@ -33,8 +33,8 @@ const App = () => {
     setData(db_costumer);
   }, [setData]);
 
-  const handleRemove = (email) => {
-    const newArray = data.filter((item) => item.email !== email);
+  const handleRemove = (CPF) => {
+    const newArray = data.filter((item) => item.CPF !== CPF);
 
     setData(newArray);
 
@@ -58,34 +58,49 @@ const App = () => {
           <Table mt="6">
             <Thead>
               <Tr>
-                <Th maxW={isMobile ? 5 : 100} fontSize="20px">
+                <Th maxW={isMobile ? 5 : 100} fontSize="20px">   
                   Nome
                 </Th>
                 <Th maxW={isMobile ? 5 : 100} fontSize="20px">
-                  E-Mail
+                  CPF
                 </Th>
+                <Th maxW={isMobile ? 15 : 130} fontSize="20px">
+                Nascimento
+                </Th>
+                <Th maxW={isMobile ? 5 : 90} fontSize="20px">
+                  Sexo
+                </Th>
+                <Th maxW={isMobile ? 5 : 100} fontSize="20px">
+                  CPF
+                </Th>
+                <Th p={0}></Th>
+                <Th p={0}></Th>
+                <Th p={0}></Th>
                 <Th p={0}></Th>
                 <Th p={0}></Th>
               </Tr>
             </Thead>
             <Tbody>
-              {data.map(({ name, email }, index) => (
+              {data.map(({ name, CPF, datNasc,sexo,endereco }, index) => (
                 <Tr key={index} cursor="pointer " _hover={{ bg: "gray.100" }}>
                   <Td maxW={isMobile ? 5 : 100}>{name}</Td>
-                  <Td maxW={isMobile ? 5 : 100}>{email}</Td>
+                  <Td maxW={isMobile ? 5 : 100}>{CPF}</Td>
+                  <Td maxW={isMobile ? 15 : 130}>{datNasc}</Td>      
+                  <Td maxW={isMobile ? 5 : 90}>{sexo}</Td>
+                  <Td maxW={isMobile ? 5 : 100}>{endereco}</Td>
                   <Td p={0}>
                     <EditIcon
                       fontSize={20}
                       onClick={() => [
-                        setDataEdit({ name, email, index }),
+                        setDataEdit({ name, CPF,datNasc,sexo,endereco, index }),
                         onOpen(),
                       ]}
                     />
                   </Td>
                   <Td p={0}>
                     <DeleteIcon
-                      fontSize={20}
-                      onClick={() => handleRemove(email)}
+                      fontSize={25}
+                      onClick={() => handleRemove(CPF)}
                     />
                   </Td>
                 </Tr>

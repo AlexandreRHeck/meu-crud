@@ -11,26 +11,31 @@ import {
     FormLabel,
     Input,
     Box,
-  } from "@chakra-ui/react";
+  }  // components do chakra UI para uso
+  from "@chakra-ui/react";
   import { useState } from "react";
   
   const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
-    const [name, setName] = useState(dataEdit.name || "");
-    const [email, setEmail] = useState(dataEdit.email || "");
+    const [name, setName] = useState(dataEdit.name || "");   //Entra com dados de ediçao se nao entra vazio
+    const [CPF, setCPF] = useState(dataEdit.CPF || ""); //Entra com dados de ediçao se nao entra vazio
+    const [datNasc, setDatNasc] = useState(dataEdit.datNasc || "");
+    const [sexo, setSexo] = useState(dataEdit.sexo || "");
+    const [endereco, setEndereco] = useState(dataEdit.endereco || "");
+
   
     const handleSave = () => {
-      if (!name || !email) return;
+      if (!name || !CPF) return;
   
-      if (emailAlreadyExists()) {
-        return alert("E-mail já cadastrado!");
+      if (cpfAlreadyExists()) {
+        return alert("CPF já cadastrado!");
       }
   
       if (Object.keys(dataEdit).length) {
-        data[dataEdit.index] = { name, email };
+        data[dataEdit.index] = { name,CPF };
       }
   
       const newDataArray = !Object.keys(dataEdit).length
-        ? [...(data ? data : []), { name, email }]
+        ? [...(data ? data : []), { name, CPF,datNasc,sexo,endereco }]
         : [...(data ? data : [])];
   
       localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
@@ -40,9 +45,8 @@ import {
       onClose();
     };
   
-    const emailAlreadyExists = () => {
-      if (dataEdit.email !== email && data?.length) {
-        return data.find((item) => item.email === email);
+    const cpfAlreadyExists = () => {
+      if (dataEdit.CPF !== CPF && data?.length) {       // Verifica cpf existente se nao estiver editando o proprio cpf
       }
   
       return false;
@@ -66,11 +70,35 @@ import {
                   />
                 </Box>
                 <Box>
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel>CPF</FormLabel>
                   <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    value={CPF}
+                    onChange={(e) => setCPF(e.target.value)}
+                  />
+                </Box>
+                <Box>
+                  <FormLabel>Data Nascimento</FormLabel>
+                  <Input
+                    type="text"
+                    value={datNasc}
+                    onChange={(e) => setDatNasc(e.target.value)}
+                  />
+                </Box>
+                <Box>
+                  <FormLabel>sexo</FormLabel>
+                  <Input
+                    type="text"
+                    value={sexo}
+                    onChange={(e) => setSexo(e.target.value)}
+                  />
+                </Box>
+                <Box>
+                  <FormLabel>endereco</FormLabel>
+                  <Input
+                    type="text"
+                    value={endereco}
+                    onChange={(e) => setEndereco(e.target.value)}
                   />
                 </Box>
               </FormControl>
