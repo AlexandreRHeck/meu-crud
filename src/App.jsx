@@ -1,4 +1,4 @@
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { EditIcon, DeleteIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -14,24 +14,40 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ModalComp from "./components/ModalComp";
+import { Input } from '@chakra-ui/react'
 
 const App = () => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();  // controle modal
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
 
-  const isMobile = useBreakpointValue({
+  const [buscaNome, setBuscaNome] = useState({});
+
+ 
+
+  const isMobile = useBreakpointValue({   //hooks chakra-ui
     base: true,
     lg: false,
   });
 
-  useEffect(() => {
+  useEffect(() => {                                               //Carrego os dados localStorage
     const db_costumer = localStorage.getItem("cad_cliente")
       ? JSON.parse(localStorage.getItem("cad_cliente"))
       : [];
 
     setData(db_costumer);
   }, [setData]);
+
+
+
+  const handleSearch = (buscaNome) =>{
+    const db_costumer = localStorage.getItem("cad_cliente")
+      ? JSON.parse(localStorage.getItem("cad_cliente"))
+      : [];
+
+      setData(db_costumer)
+  }
 
   const handleRemove = (CPF) => {
     const newArray = data.filter((item) => item.CPF !== CPF);
@@ -49,11 +65,26 @@ const App = () => {
       fontSize="20px"
       fontFamily="poppins"
     >
-      <Box maxW={800} w="100%" h="100vh" py={10} px={2}>
+        <Box maxW={800} w="100%" h="100vh" py={10} px={2}>
         <Button colorScheme="blue" onClick={() => [setDataEdit({}), onOpen()]}>
           NOVO CADASTRO
         </Button>
 
+      
+        <Input
+        value={buscaNome}
+        onChange={(e) => handleSearch(e.target.value)}
+
+        placeholder='Digite o nome do Paciente para Consulta'
+        align="center"
+        justify="center"
+        fontSize="20px"
+        fontFamily="poppins"
+      />
+    
+
+
+      
         <Box overflowY="auto" height="100%">
           <Table mt="6">
             <Thead>
@@ -64,7 +95,7 @@ const App = () => {
                 <Th maxW={isMobile ? 5 : 100} fontSize="20px">
                   CPF
                 </Th>
-                <Th maxW={isMobile ? 15 : 130} fontSize="20px">
+                <Th maxW={isMobile ? 16 : 135} fontSize="20px">
                 Nascimento
                 </Th>
                 <Th maxW={isMobile ? 5 : 90} fontSize="20px">
@@ -90,7 +121,7 @@ const App = () => {
                   <Td maxW={isMobile ? 5 : 100}>{endereco}</Td>
                   <Td p={0}>
                     <EditIcon
-                      fontSize={20}
+                      fontSize={25}
                       onClick={() => [
                         setDataEdit({ name, CPF,datNasc,sexo,endereco, index }),
                         onOpen(),
@@ -100,7 +131,7 @@ const App = () => {
                   <Td p={0}>
                     <DeleteIcon
                       fontSize={25}
-                      onClick={() => handleRemove(CPF)}
+                      onClick={() => handleRemove(CPF)}  // Removendo por CPF assim sendo usuario uninco por cpf
                     />
                   </Td>
                 </Tr>
@@ -117,6 +148,9 @@ const App = () => {
           setData={setData}
           dataEdit={dataEdit}
           setDataEdit={setDataEdit}
+          setBuscaNome={setBuscaNome}
+          
+        
         />
       )}
     </Flex>

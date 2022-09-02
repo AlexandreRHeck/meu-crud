@@ -16,12 +16,12 @@ import {
   import { useState } from "react";
   
   const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
-    const [name, setName] = useState(dataEdit.name || "");   //Entra com dados de ediçao se nao entra vazio
+    const [name, setName] = useState(dataEdit.name || "");   //Inicia om dados de ediçao se nao entra vazio
     const [CPF, setCPF] = useState(dataEdit.CPF || ""); //Entra com dados de ediçao se nao entra vazio
     const [datNasc, setDatNasc] = useState(dataEdit.datNasc || "");
     const [sexo, setSexo] = useState(dataEdit.sexo || "");
     const [endereco, setEndereco] = useState(dataEdit.endereco || "");
-
+    
   
     const handleSave = () => {
       if (!name || !CPF) return;
