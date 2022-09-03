@@ -22,7 +22,7 @@ const App = () => {
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
 
-  const [buscaNome, setBuscaNome] = useState({});
+  const [buscaNome, setBuscaNome] = useState({});  
 
  
 
@@ -40,14 +40,15 @@ const App = () => {
   }, [setData]);
 
 
-
-  const handleSearch = (buscaNome) =>{
+      {/*
+  const handleSearch = (buscaNome) =>{                          //  handleSearch =======Parte guardada para começar a fazer filter======
     const db_costumer = localStorage.getItem("cad_cliente")
       ? JSON.parse(localStorage.getItem("cad_cliente"))
       : [];
 
       setData(db_costumer)
-  }
+  }  
+      */}
 
   const handleRemove = (CPF) => {
     const newArray = data.filter((item) => item.CPF !== CPF);
@@ -70,18 +71,19 @@ const App = () => {
           NOVO CADASTRO
         </Button>
 
-      
-        <Input
+    {/* =======Parte guardada para começar a fazer filter======
+                
+       <Input
         value={buscaNome}
-        onChange={(e) => handleSearch(e.target.value)}
+        onChange={(e) => handleSearch(e.target.value)} 
 
         placeholder='Digite o nome do Paciente para Consulta'
         align="center"
         justify="center"
         fontSize="20px"
         fontFamily="poppins"
-      />
-    
+      /> 
+    */}
 
 
       
@@ -96,13 +98,13 @@ const App = () => {
                   CPF
                 </Th>
                 <Th maxW={isMobile ? 16 : 135} fontSize="20px">
-                Nascimento
+                  Nascimento
                 </Th>
                 <Th maxW={isMobile ? 5 : 90} fontSize="20px">
                   Sexo
                 </Th>
-                <Th maxW={isMobile ? 5 : 100} fontSize="20px">
-                  CPF
+                <Th maxW={isMobile ? 5 : 135} fontSize="20px">
+                  ENDERECO
                 </Th>
                 <Th p={0}></Th>
                 <Th p={0}></Th>
@@ -116,9 +118,9 @@ const App = () => {
                 <Tr key={index} cursor="pointer " _hover={{ bg: "gray.100" }}>
                   <Td maxW={isMobile ? 5 : 100}>{name}</Td>
                   <Td maxW={isMobile ? 5 : 100}>{CPF}</Td>
-                  <Td maxW={isMobile ? 15 : 130}>{datNasc}</Td>      
+                  <Td maxW={isMobile ? 16 : 135}>{datNasc}</Td>      
                   <Td maxW={isMobile ? 5 : 90}>{sexo}</Td>
-                  <Td maxW={isMobile ? 5 : 100}>{endereco}</Td>
+                  <Td maxW={isMobile ? 5 : 135}>{endereco}</Td>
                   <Td p={0}>
                     <EditIcon
                       fontSize={25}
@@ -148,7 +150,7 @@ const App = () => {
           setData={setData}
           dataEdit={dataEdit}
           setDataEdit={setDataEdit}
-          setBuscaNome={setBuscaNome}
+          
           
         
         />

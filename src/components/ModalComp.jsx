@@ -31,11 +31,11 @@ import {
       }
   
       if (Object.keys(dataEdit).length) {
-        data[dataEdit.index] = { name,CPF };
+        data[dataEdit.index] = { name,CPF,datNasc,sexo,endereco };
       }
   
       const newDataArray = !Object.keys(dataEdit).length
-        ? [...(data ? data : []), { name, CPF,datNasc,sexo,endereco }]
+        ? [...(data ? data : []), { name,CPF,datNasc,sexo,endereco }]
         : [...(data ? data : [])];
   
       localStorage.setItem("cad_cliente", JSON.stringify(newDataArray));
