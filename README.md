@@ -1,6 +1,6 @@
 CRUD
 
-CRUD simples desenvolvido em Chakra utilzando provider para gerenciamento de dados, nao incluido ainda a persistencia de dados.
+CRUD simples desenvolvido em ChakraReact.
 
 ## Principal
 ![github-small](https://github.com/AlexandreRHeck/meu-crud/blob/master/imggit/cad2.png)
